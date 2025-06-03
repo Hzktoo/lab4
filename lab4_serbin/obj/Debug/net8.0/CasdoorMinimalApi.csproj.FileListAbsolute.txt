@@ -29,3 +29,5 @@ D:\web\lab3_serbin\obj\Debug\net8.0\refint\CasdoorMinimalApi.dll
 D:\web\lab3_serbin\obj\Debug\net8.0\CasdoorMinimalApi.pdb
 D:\web\lab3_serbin\obj\Debug\net8.0\CasdoorMinimalApi.genruntimeconfig.cache
 D:\web\lab3_serbin\obj\Debug\net8.0\ref\CasdoorMinimalApi.dll
+D:\web\lab3_serbin\bin\Debug\net8.0\Newtonsoft.Json.dll
+D:\web\lab3_serbin\bin\Debug\net8.0\websocket-sharp.dll

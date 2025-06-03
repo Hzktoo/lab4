@@ -1,19 +1,24 @@
 using Microsoft.AspNetCore.Http;
-using System.Text;
 using System.IdentityModel.Tokens.Jwt;
+using System.Net.WebSockets;
+using System.Text;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddControllers();
 builder.Services.AddCors();
+
 var app = builder.Build();
 
 app.UseHttpsRedirection();
 app.UseCors(policy => policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 app.UseRouting();
+app.UseWebSockets();
 app.UseCookiePolicy();
 
-app.UseDefaultFiles(); 
-app.UseStaticFiles();  
+app.UseDefaultFiles();
+app.UseStaticFiles();
 
 app.MapGet("/signin-casdoor", async (HttpContext context) =>
 {
@@ -30,7 +35,7 @@ app.MapGet("/signin-casdoor", async (HttpContext context) =>
     }));
 
     var tokenJson = await tokenResponse.Content.ReadAsStringAsync();
-    var token = System.Text.Json.JsonDocument.Parse(tokenJson).RootElement.GetProperty("access_token").GetString();
+    var token = JsonDocument.Parse(tokenJson).RootElement.GetProperty("access_token").GetString();
 
     context.Response.Cookies.Append("jwt_token", token, new CookieOptions
     {
@@ -55,6 +60,36 @@ app.MapGet("/userinfo", (HttpContext context) =>
         .ToDictionary(kvp => kvp.Key, kvp => kvp.Value?.ToString());
 
     return Results.Json(userInfo);
+});
+
+var cryptoService = new CryptoPriceService();
+cryptoService.Start();
+
+app.Map("/ws", async (HttpContext context) =>
+{
+    if (context.WebSockets.IsWebSocketRequest)
+    {
+        var socket = await context.WebSockets.AcceptWebSocketAsync();
+        Console.WriteLine("Client connected to WebSocket!");
+        cryptoService.AddClient(socket);
+
+        var buffer = new byte[1024 * 4];
+        while (socket.State == WebSocketState.Open)
+        {
+            var result = await socket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+            if (result.MessageType == WebSocketMessageType.Close)
+            {
+                await socket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Closed by client", CancellationToken.None);
+                break;
+            }
+        }
+
+        cryptoService.RemoveClient(socket);
+    }
+    else
+    {
+        context.Response.StatusCode = 400;
+    }
 });
 
 app.Run();

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "U/ENPuoXmXqJomKtp5GNeyg9p+1i0u2qJ7mfERZUTVJV4ViplO8vJ8Jk0sfQ6swnHbT81IvPruUKGO9Svu4Trw==",
+  "dgSpecHash": "6B/UkhHQb07wDGFw8aXX5Njwdt4YWwMwVopeS7SaAW90suW7WMTAD75P50Nqoj/59ZLU0liT4PopmbcPTm/YCA==",
   "success": true,
   "projectFilePath": "D:\\web\\lab3_serbin\\CasdoorMinimalApi.csproj",
   "expectedPackageFiles": [
@@ -10,7 +10,9 @@
     "C:\\Users\\User\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\8.10.0\\microsoft.identitymodel.jsonwebtokens.8.10.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.identitymodel.logging\\8.10.0\\microsoft.identitymodel.logging.8.10.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.identitymodel.tokens\\8.10.0\\microsoft.identitymodel.tokens.8.10.0.nupkg.sha512",
-    "C:\\Users\\User\\.nuget\\packages\\system.identitymodel.tokens.jwt\\8.10.0\\system.identitymodel.tokens.jwt.8.10.0.nupkg.sha512"
+    "C:\\Users\\User\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\system.identitymodel.tokens.jwt\\8.10.0\\system.identitymodel.tokens.jwt.8.10.0.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\websocketsharp-netstandard\\1.0.1\\websocketsharp-netstandard.1.0.1.nupkg.sha512"
   ],
   "logs": []
 }
